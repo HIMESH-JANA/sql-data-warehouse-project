@@ -1,6 +1,10 @@
+/*
 
+Create tables tables
 
+Script Purpose:this script create tables in the Bronze schema.
 
+*/
 
 CREATE TABLE bronze.crm_cust_info
 (
