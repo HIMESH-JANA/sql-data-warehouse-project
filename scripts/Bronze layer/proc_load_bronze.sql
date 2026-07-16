@@ -1,6 +1,15 @@
+/*
 
+Store Procrdure : load bronze layer
 
+Script Purpose: this script loads the data from souec(csv files) into the Bronze schema.
+			also,
+				-truncates the already existing tables
+				-uses Full load method
 
+parameters : none
+
+*/
 
 CREATE OR ALTER  PROCEDURE bronze.load_bronze AS
 BEGIN
