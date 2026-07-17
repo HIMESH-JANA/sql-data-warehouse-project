@@ -15,7 +15,7 @@ cst_firstname NVARCHAR(50),
 cst_lastname NVARCHAR(50),
 cst_marital_status NVARCHAR(50),
 cst_gndr NVARCHAR(50),
-cst_create_date INT
+cst_create_date DATE
 )
 go
 
@@ -28,8 +28,8 @@ prd_key NVARCHAR(50),
 prd_nm NVARCHAR(50),
 prd_cost INT,
 prd_line NVARCHAR(50),
-prd_start_dt INT,
-prd_end_dt INT
+prd_start_dt DATETIME,
+prd_end_dt DATETIME
 )
 go
 
@@ -54,7 +54,7 @@ DROP TABLE bronze.erp_cust_az12;
 CREATE TABLE bronze.erp_cust_az12
 (
 cid NVARCHAR(50),
-bdate INT,
+bdate DATE,
 gen NVARCHAR(50)
 )
 go
