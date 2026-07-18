@@ -84,20 +84,15 @@ BEGIN
 			ELSE CAST(CAST(sls_due_dt AS VARCHAR) AS DATE)
 		END AS sls_due_dt,
 		CASE 
-			WHEN sls_sales IS NULL OR sls_sales <= 0 
-				 OR sls_sales != sls_quantity * ABS(sls_price) 
-			THEN sls_quantity * ABS(sls_price)
+			WHEN sls_sales IS NULL OR sls_sales <= 0 OR sls_sales != sls_quantity * ABS(sls_price) 
+				THEN sls_quantity * ABS(sls_price)
 			ELSE sls_sales
-		END AS sls_sales,
-		CASE 
-			WHEN sls_quantity IS NULL OR sls_quantity <= 0 THEN 1   -- or ABS(sls_quantity), or filter the row out
-			ELSE sls_quantity 
-		END AS sls_quantity,
+		END AS sls_sales, -- Recalculate sales if original value is missing or incorrect
+		sls_quantity,
 		CASE 
 			WHEN sls_price IS NULL OR sls_price <= 0 
-				 OR sls_price != ABS(sls_sales) / NULLIF(sls_quantity, 0)
-			THEN ABS(sls_sales) / NULLIF(sls_quantity, 0)
-			ELSE sls_price
+				THEN sls_sales / NULLIF(sls_quantity, 0)
+			ELSE sls_price  -- Derive price if original value is invalid
 		END AS sls_price
 	FROM bronze.crm_sales_details;
 
